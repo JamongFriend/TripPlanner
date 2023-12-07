@@ -1,12 +1,15 @@
 {
-  "name": "step4",
+  "name": "wep2Projects",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "test": "mocha --exit",
+    "test-unit": "mocha --exit test/unit.js",
+    "test-api": "mocha --exit test/api.js"
   },
-  "author": "Prof. Wonvin Kim, Computer Software, Korean Bibie University",
+  "author": "aing",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -20,9 +23,13 @@
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
   }
 }

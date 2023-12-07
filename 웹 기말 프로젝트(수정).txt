@@ -3,7 +3,7 @@
 로그인/회원가입 모듈
 
 여행계획 생성 모듈
--여행 정보(이름, 날짜, 인원, 목적 등) 입력 [post] /trip/detail
+-여행 정보(이름, 날짜, 인원, 목적 등) 입력 [post] /trip/detail 
 -여행 장소 입력 (지도 포함)  [post] /trip/place
 -숙소 입력 (지도 포함) [post] /trip/hotel
 
