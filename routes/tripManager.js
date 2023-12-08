@@ -57,11 +57,11 @@ router.post('/update', async (req, res, next) => {
 router.get('/delete/:plan', async (req, res, next) => {
     try {
         const result = await Plan.destroy({
-            where: { plan: req.params.plan }
+            where: { name: req.params.name }
         });
 
         if (result) next();
-        else next(`There is no user with ${req.params.plan}.`);
+        else next(`There is no user with ${req.params.name}.`);
     } catch (err) {
         console.error(err);
         next(err);
