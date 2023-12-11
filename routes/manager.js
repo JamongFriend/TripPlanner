@@ -10,7 +10,7 @@ router.get('/readList', async (req, res, next) => {
     try {
         const plan = await Plan.findAll({
             where: { name: req.params.name },
-            attributes: ['name', 'date', 'peoples', 'perpose', 'place']
+            attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
 
         if (plan) res.json(plan);
@@ -25,7 +25,7 @@ router.get('/readPlan', async (req, res, next) => {
     try {
         const plan = await Plan.findOne({
             where: { name: req.params.name },
-            attributes: ['name', 'date', 'peoples', 'perpose', 'place']
+            attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
 
         if (plan) res.json(plan);
@@ -40,13 +40,17 @@ router.get('/readPlan', async (req, res, next) => {
 router.post('/update', async (req, res, next) => {
     try {
         const result = await Plan.update({
-            description: req.body.description
+            name: req.body.name,
+            date: req.body.date,
+            peoples: req.body.peoples,
+            perpose: req.body.perpose,
+            place: req.body.place
         }, {
-            where: { name: req.body.name }
+            where: { num: req.body.num }
         });
 
         if (result) res.redirect('/');
-        else next(`There is no user with ${req.params.name}.`);
+        else next(`There is no plan with ${req.params.num}.`);
     } catch (err) {
         console.error(err);
         next(err);
@@ -57,16 +61,16 @@ router.post('/update', async (req, res, next) => {
 router.get('/delete/:plan', async (req, res, next) => {
     try {
         const result = await Plan.destroy({
-            where: { name: req.params.name }
+            where: { num: req.params.num }
         });
 
         if (result) next();
-        else next(`There is no user with ${req.params.name}.`);
+        else next(`There is no plan with ${req.params.num}.`);
     } catch (err) {
         console.error(err);
         next(err);
     }
-}, logout);
+});
 
 
 module.exports = router;

@@ -17,8 +17,8 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const commentRouter = require('./routes/comment');
 const indexRouter = require('./routes');
-const tripCreaterRouter = require('./routes/tripCreater');
-const tripManagerRouter = require('./routes/tripManager');
+const createrRouter = require('./routes/creater');
+const managerRouter = require('./routes/manager');
 
 dotenv.config();
 passportConfig();
@@ -61,8 +61,8 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/', indexRouter);
-app.use('/creater', tripCreaterRouter);
-app.use('/manager', tripManagerRouter);
+app.use('/creater', createrRouter);
+app.use('/manager', managerRouter);
 
 
 app.use((req, res) =>
