@@ -6,11 +6,11 @@ const Plan = require('../models/plan');
 const { isLoggedIn } = require('./helpers');
 
 // 여행 계획 공유 [POST]
-router.post('/upload',isLoggedIn, async(req, res, next) => {
+router.post('/upload', async(req, res, next) => {
     try {
         const planData = await Plan.findOne({
             where: {
-                name: req.params.name
+                name: req.body.name
             }
         });
         await AllPlan.create({
@@ -24,10 +24,10 @@ router.post('/upload',isLoggedIn, async(req, res, next) => {
             restaurant: planData.restaurant
         });
         if (planData) res.redirect('/');
-        else next(`There is no plan with ${req.params.name}.`);
+        else next(`There is no plan with ${req.body.name}.`);
     } catch (error) {
         console.error(error);
-        next(err);
+        next(error);
     }
 });
 
