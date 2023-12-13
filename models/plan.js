@@ -31,6 +31,10 @@ module.exports = class Plan extends Sequelize.Model {
             hotel: {
                 type: Sequelize.TEXT,
                 allowNull: true
+            },
+            restaurant: {
+                type: Sequelize.TEXT,
+                allowNull: true
             }
         }, {
             sequelize,

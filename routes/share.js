@@ -10,11 +10,10 @@ router.post('/upload',isLoggedIn, async(req, res, next) => {
     try {
         const planData = await Plan.findOne({
             where: {
-                id: req.params.id,
                 name: req.params.name
             }
         });
-        const createdAllPlan = await AllPlan.create({
+        await AllPlan.create({
             id: planData.id,
             name: planData.name,
             date: planData.date,
@@ -23,7 +22,7 @@ router.post('/upload',isLoggedIn, async(req, res, next) => {
             place: planData.place,
             hotel: planData.hotel
         });
-        if (createdAllPlan) res.redirect('/');
+        if (planData) res.redirect('/');
         else next(`There is no plan with ${req.params.name}.`);
     } catch (error) {
         console.error(error);

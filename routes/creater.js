@@ -1,6 +1,6 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
 const Plan = require('../models/plan');
+const Suggest = require('../modules/suggest')
 
 const router = express.Router();
 const { isLoggedIn } = require('./helpers');
@@ -17,7 +17,8 @@ router.post('/create',isLoggedIn, async (req, res, next) => {
             peoples,
             perpose,
             place,
-            hotel
+            hotel,
+            restaurant
         });
 
         res.redirect('/');
@@ -27,24 +28,28 @@ router.post('/create',isLoggedIn, async (req, res, next) => {
     }
 })
 
-router.get('/',(req,res,next)=>{
-    res.render('index',{
-        javascriptkey:process.env.javascriptkey
-    });
-});
-
-//지도 출력
-router.get('/map', async (req, res, next)=> {
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption); 
+// 추천목록에 있는 여행지 입력
+router.post('/inSugPlace', async (req, res, next) => {
+    try {
+        const planData = await Suggest.findOne({
+            where: {
+                place: req.params.place
+            }
+        });
+        await Plan.update({
+            place: req.body.place
+        }, {
+            where: { name: req.body.name }
+        });
+        if(planData) res.redirect('/');
+        else next(`There is no place with ${req.params.place}.`);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
 })
 
-// 장소 입력
+// 여행지 직접 입력
 router.post('/place', async (req, res, next) => {
     try {
         await Plan.update({
@@ -52,6 +57,9 @@ router.post('/place', async (req, res, next) => {
         }, {
             where: { name: req.body.name }
         });
+        await Suggest.create({
+            place: req.body.place
+        })
 
         res.redirect('/');
     } catch (err) {
@@ -60,10 +68,84 @@ router.post('/place', async (req, res, next) => {
     }
 })
 
-// 숙소 입력
-router.post('/hotel',(req, res) => {
-
+// 추천목록에 있는 숙소 입력
+router.post('/inSugHotel', async (req, res, next) => {
+    try {
+        const planData = await Suggest.findOne({
+            where: {
+                hotel: req.params.hotel
+            }
+        });
+        await Plan.update({
+            hotel: req.body.hotel
+        }, {
+            where: { name: req.body.name }
+        });
+        if(planData) res.redirect('/');
+        else next(`There is no place with ${req.params.hotel}.`);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
 })
 
+// 숙소 직접 입력
+router.post('/hotel', async (req, res, next) => {
+    try {
+        await Plan.update({
+            hotel: req.body.hotel
+        }, {
+            where: { name: req.body.name }
+        });
+        await Suggest.create({
+            hotel: req.body.hotel
+        })
+
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+})
+
+// 추천목록에 있는 식당 입력
+router.post('/inSugRestaurant', async (req, res, next) => {
+    try {
+        const planData = await Suggest.findOne({
+            where: {
+                restaurant: req.params.restaurant
+            }
+        });
+        await Plan.update({
+            restaurant: req.body.restaurant
+        }, {
+            where: { name: req.body.name }
+        });
+        if(planData) res.redirect('/');
+        else next(`There is no place with ${req.params.restaurant}.`);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+})
+
+// 식당 직접 입력
+router.post('/restaurant', async (req, res, next) => {
+    try {
+        await Plan.update({
+            restaurant: req.body.restaurant
+        }, {
+            where: { name: req.body.name }
+        });
+        await Suggest.create({
+            restaurant: req.body.restaurant
+        })
+
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+})
 
 module.exports = router;
