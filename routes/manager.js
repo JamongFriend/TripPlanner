@@ -9,11 +9,9 @@ const router = express.Router();
 router.get('/readList', async (req, res, next) => {
     try {
         const plan = await Plan.findAll({
-            where: { name: req.params.name },
             attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
-
-        if (plan) res.json(plan);
+        res.json(plan);
     } catch (err) {
         console.error(err);
         next(err);
@@ -25,7 +23,7 @@ router.get('/readPlan', async (req, res, next) => {
     try {
         const plan = await Plan.findOne({
             where: { name: req.params.name },
-            attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
+            attributes: ['id', 'name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
 
         if (plan) res.json(plan);
@@ -46,7 +44,7 @@ router.post('/update', async (req, res, next) => {
             perpose: req.body.perpose,
             place: req.body.place
         }, {
-            where: { num: req.body.num }
+            where: { name: req.body.name }
         });
 
         if (result) res.redirect('/');

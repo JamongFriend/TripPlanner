@@ -3,18 +3,15 @@ const bcrypt = require('bcrypt');
 const Plan = require('../models/plan');
 
 const router = express.Router();
+const { isLoggedIn } = require('./helpers');
 
 //생성
-router.post('/create', async (req, res, next) => {
-    const {num, name, date, peoples, perpose} = req.body;
-    const number = await Plan.findOne({ where: { num } });
-    if (number) {
-        next('이용 불가능한 번호입니다.');
-        return;
-    }
+router.post('/create',isLoggedIn, async (req, res, next) => {
+    const {name, date, peoples, perpose} = req.body;
+    const {id} = req.user.id;
     try {
         await Plan.create({
-            num,
+            id,
             name,
             date,
             peoples,
