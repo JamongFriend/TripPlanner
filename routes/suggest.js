@@ -1,5 +1,5 @@
 const express = require('express');
-const Suggest = requlre('../modules/suggest');
+const Suggest = require('../models/suggest');
 
 const router = express.Router();
 
@@ -41,3 +41,5 @@ router.get('/suggestrr', async (req, res, next) => {
         next(err);
     }
 });
+
+module.exports = router;

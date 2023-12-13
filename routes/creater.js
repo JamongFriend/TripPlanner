@@ -1,6 +1,6 @@
 const express = require('express');
 const Plan = require('../models/plan');
-const Suggest = require('../modules/suggest')
+const Suggest = require('../models/suggest')
 
 const router = express.Router();
 const { isLoggedIn } = require('./helpers');

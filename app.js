@@ -19,6 +19,8 @@ const commentRouter = require('./routes/comment');
 const indexRouter = require('./routes');
 const createrRouter = require('./routes/creater');
 const managerRouter = require('./routes/manager');
+const shareRouter = require('./routes/share');
+const suggestRouter = require('./routes/suggest');
 
 dotenv.config();
 passportConfig();
@@ -63,6 +65,9 @@ app.use('/comment', commentRouter);
 app.use('/', indexRouter);
 app.use('/creater', createrRouter);
 app.use('/manager', managerRouter);
+app.use('/share', shareRouter);
+app.use('/suggest', suggestRouter);
+
 
 
 app.use((req, res) =>
