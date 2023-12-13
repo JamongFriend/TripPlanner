@@ -5,7 +5,7 @@ const Plan = require('../models/plan');
 
 const { isLoggedIn } = require('./helpers');
 
-// 여행 계획 올리기 [POST]
+// 여행 계획 공유 [POST]
 router.post('/upload',isLoggedIn, async(req, res, next) => {
     try {
         const planData = await Plan.findOne({
