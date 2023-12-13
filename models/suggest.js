@@ -27,5 +27,3 @@ module.exports = class Suggest extends Sequelize.Model {
         });
     }
 };
-
-module.exports = Suggest;

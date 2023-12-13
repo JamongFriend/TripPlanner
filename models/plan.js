@@ -48,5 +48,3 @@ module.exports = class Plan extends Sequelize.Model {
         });
     }
 };
-
-module.exports = Plan;

@@ -53,5 +53,3 @@ module.exports = class AllPlan extends Sequelize.Model {
         AllPlan.hasOne(db.Plan, { foreignKey: 'allPlanId' });
     }
 };
-
-module.exports = AllPlan;
