@@ -82,7 +82,7 @@ router.post('/inSugHotel', async (req, res, next) => {
             where: { name: req.body.name }
         });
         if(planData) res.redirect('/');
-        else next(`There is no place with ${req.params.hotel}.`);
+        else next(`There is no hotel with ${req.params.hotel}.`);
     } catch (err) {
         console.error(err);
         next(err);

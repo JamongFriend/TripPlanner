@@ -20,7 +20,8 @@ router.post('/upload',isLoggedIn, async(req, res, next) => {
             peoples: planData.peoples,
             perpose: planData.perpose,
             place: planData.place,
-            hotel: planData.hotel
+            hotel: planData.hotel,
+            restaurant: planData.restaurant
         });
         if (planData) res.redirect('/');
         else next(`There is no plan with ${req.params.name}.`);

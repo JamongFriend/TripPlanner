@@ -52,7 +52,7 @@ router.route('/')
 router.post('/update', async (req, res, next) => {
     try {
         const result = await User.update({
-            description: req.body.description
+            name: req.body.anme
         }, {
             where: { id: req.body.id }
         });
@@ -79,26 +79,11 @@ router.get('/delete/:id', async (req, res, next) => {
     }
 }, logout);
 
-router.get('/:id/comments', async (req, res, next) => {
-    try {
-        const user = await User.findOne({
-            where: { id: req.params.id }
-        });
-
-        const comments = await user.getComments();
-        if (user) res.json(comments);
-        else next(`There is no user with ${req.params.id}.`);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
-
 router.get('/:id', async (req, res, next) => {
     try {
         const user = await User.findOne({
             where: { id: req.params.id },
-            attributes: ['id', 'name', 'description']
+            attributes: ['id', 'name']
         });
 
         if (user) res.json(user);
