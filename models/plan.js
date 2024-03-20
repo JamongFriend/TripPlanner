@@ -3,10 +3,14 @@ const Sequelize = require('sequelize');
 module.exports = class Plan extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            name: {
+            id: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
                 primaryKey: true
+            },
+            name: {
+                type: Sequelize.STRING(100),
+                allowNull: false
             },
             date: {
                 type: Sequelize.STRING(100),
@@ -27,6 +31,10 @@ module.exports = class Plan extends Sequelize.Model {
             hotel: {
                 type: Sequelize.TEXT,
                 allowNull: true
+            },
+            restaurant: {
+                type: Sequelize.TEXT,
+                allowNull: true
             }
         }, {
             sequelize,
@@ -38,10 +46,5 @@ module.exports = class Plan extends Sequelize.Model {
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
         });
-    }
-
-    //이거 수정해야함
-    static associate(db) {
-        db.User.hasMany(db.Comment, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'cascade' });
     }
 };

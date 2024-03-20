@@ -8,12 +8,9 @@ const router = express.Router();
 //자신이 생성한 여행 계획 리스트 확인
 router.get('/readList', async (req, res, next) => {
     try {
-        const plan = await Plan.findAll({
-            where: { name: req.params.name },
+        await Plan.findAll({
             attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
-
-        if (plan) res.json(plan);
     } catch (err) {
         console.error(err);
         next(err);
@@ -25,11 +22,11 @@ router.get('/readPlan', async (req, res, next) => {
     try {
         const plan = await Plan.findOne({
             where: { name: req.params.name },
-            attributes: ['name', 'date', 'peoples', 'perpose', 'place', 'hotel']
+            attributes: ['id', 'name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
 
         if (plan) res.json(plan);
-        else next(`There is no user with ${req.params.name}.`);
+        else next(`There is no plan with ${req.params.name}.`);
     } catch (err) {
         console.error(err);
         next(err);
@@ -43,10 +40,9 @@ router.post('/update', async (req, res, next) => {
             name: req.body.name,
             date: req.body.date,
             peoples: req.body.peoples,
-            perpose: req.body.perpose,
-            place: req.body.place
+            perpose: req.body.perpose
         }, {
-            where: { num: req.body.num }
+            where: { name: req.body.name }
         });
 
         if (result) res.redirect('/');
@@ -61,11 +57,11 @@ router.post('/update', async (req, res, next) => {
 router.get('/delete/:plan', async (req, res, next) => {
     try {
         const result = await Plan.destroy({
-            where: { num: req.params.num }
+            where: { name: req.params.name }
         });
 
         if (result) next();
-        else next(`There is no plan with ${req.params.num}.`);
+        else next(`There is no plan with ${req.params.name}.`);
     } catch (err) {
         console.error(err);
         next(err);
