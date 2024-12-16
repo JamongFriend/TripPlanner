@@ -4,15 +4,23 @@ module.exports = class Suggest extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
             place: {
-                type: Sequelize.TEXT,
+                type: Sequelize.STRING(255),
                 allowNull: true
             },
             hotel: {
-                type: Sequelize.TEXT,
+                type: Sequelize.STRING(255),
                 allowNull: true
             },
             restaurant: {
-                type: Sequelize.TEXT,
+                type: Sequelize.STRING(255),
+                allowNull: true
+            },
+            latitude: {
+                type: Sequelize.DECIMAL(10, 8), // 위도
+                allowNull: true
+            },
+            longitude: {
+                type: Sequelize.DECIMAL(11, 8), // 경도
                 allowNull: true
             }
         }, {
