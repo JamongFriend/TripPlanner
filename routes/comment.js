@@ -1,3 +1,4 @@
+//댓글 관련 기능
 const express = require('express');
 const Comment = require('../models/comment');
 

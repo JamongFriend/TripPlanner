@@ -1,3 +1,5 @@
+//여행 계획 공유 기능
+
 const express = require('express');
 const router = express.Router();
 const AllPlan = require('../models/allPlan');
@@ -13,6 +15,11 @@ router.post('/upload', async(req, res, next) => {
                 name: req.body.name
             }
         });
+        
+        if (!planData) {
+            return next(`There is no plan with ${req.body.name}.`);
+        }
+        
         await AllPlan.create({
             id: planData.id,
             name: planData.name,
@@ -23,8 +30,9 @@ router.post('/upload', async(req, res, next) => {
             hotel: planData.hotel,
             restaurant: planData.restaurant
         });
-        if (planData) res.redirect('/');
-        else next(`There is no plan with ${req.body.name}.`);
+        
+        res.redirect('/');
+        
     } catch (error) {
         console.error(error);
         next(error);
@@ -45,7 +53,7 @@ router.get('/sharedlist', async(req, res, next) => {
 });
 
 // 확인하고픈 계획 보기 [GET]
-router.get('/view/:id', async(req, res, next) => {
+router.get('/view/:id', async (req, res, next) => {
     try {
         const userPlan = await AllPlan.findOne({
             where: { 
@@ -54,16 +62,20 @@ router.get('/view/:id', async(req, res, next) => {
             },
             attributes: ['id', 'name', 'date', 'peoples', 'perpose', 'place', 'hotel']
         });
-        if(userPlan)res.json(userPlan);
-        else next(`There is no plan with ${req.params.name}.`);
+        if (userPlan) {
+            res.json(userPlan);
+        } else {
+            next(`There is no plan with ${req.params.id}.`);
+        }
     } catch (err) {
         console.error(err);
         next(err);
     }
 });
 
+
 // 계획 가져오기 [POST]
-router.post('/getplan', async(req, res, next) => {
+router.post('/getplan/:id/:name', async(req, res, next) => {
     try {
         const planData = await AllPlan.findOne({
             where: {
@@ -71,7 +83,11 @@ router.post('/getplan', async(req, res, next) => {
                 name: req.params.name
             }
         });
-        const getPlan = await Plan.create({
+        if (!planData) {
+            return next(`There is no plan with ${req.params.name}.`);
+        }
+        
+        await Plan.create({
             id: planData.id,
             name: planData.name,
             date: planData.date,
@@ -80,12 +96,13 @@ router.post('/getplan', async(req, res, next) => {
             place: planData.place,
             hotel: planData.hotel
         });
-        if (getPlan) res.redirect('/');
-        else next(`There is no plan with ${req.params.name}.`);
+
+        res.redirect('/');
     } catch (error) {
         console.error(error);
-        next(err);
+        next(error);
     }
 });
+
 
 module.exports = router;

@@ -1,12 +1,11 @@
 const express = require('express');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
-
 const { logout } = require('./helpers');
-
 
 const router = express.Router();
 
+// 회원가입 페이지 또는 회원가입 처리
 router.route('/')
     .get(async (req, res, next) => {
         try {
@@ -27,13 +26,13 @@ router.route('/')
     .post(async (req, res, next) => {
         const { id, password, name, description } = req.body;
 
-        const user = await User.findOne({ where: { id } });
-        if (user) {
-            next('이미 등록된 사용자 아이디입니다.');
-            return;
-        }
-
         try {
+            const user = await User.findOne({ where: { id } });
+            if (user) {
+                res.status(400).send('이미 등록된 사용자 아이디입니다.');
+                return;
+            }
+
             const hash = await bcrypt.hash(password, 12);
             await User.create({
                 id,
@@ -49,36 +48,43 @@ router.route('/')
         }
     });
 
+// 사용자 정보 업데이트
 router.post('/update', async (req, res, next) => {
     try {
         const result = await User.update({
-            name: req.body.anme
+            name: req.body.name
         }, {
             where: { id: req.body.id }
         });
 
         if (result) res.redirect('/');
-        else next(`There is no user with ${req.params.id}.`);
+        else res.status(404).send(`There is no user with ${req.body.id}.`);
     } catch (err) {
         console.error(err);
         next(err);
     }
 });
 
+// 사용자 삭제
 router.get('/delete/:id', async (req, res, next) => {
     try {
         const result = await User.destroy({
             where: { id: req.params.id }
         });
 
-        if (result) next();
-        else next(`There is no user with ${req.params.id}.`);
+        if (result) {
+            logout(req, res);
+            res.redirect('/login');
+        } else {
+            res.status(404).send(`There is no user with ${req.params.id}.`);
+        }
     } catch (err) {
         console.error(err);
         next(err);
     }
-}, logout);
+});
 
+// 특정 사용자 정보 조회
 router.get('/:id', async (req, res, next) => {
     try {
         const user = await User.findOne({
@@ -87,7 +93,7 @@ router.get('/:id', async (req, res, next) => {
         });
 
         if (user) res.json(user);
-        else next(`There is no user with ${req.params.id}.`);
+        else res.status(404).send(`There is no user with ${req.params.id}.`);
     } catch (err) {
         console.error(err);
         next(err);
