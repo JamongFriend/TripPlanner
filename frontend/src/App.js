@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Plans from './pages/Plans';
+import About from './pages/About';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('/api')
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      <h1>{message}</h1>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/plans" component={Plans} />
+        <Route path="/about" component={About} />
+      </Switch>
+    </Router>
   );
 }
 
