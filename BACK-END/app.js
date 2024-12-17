@@ -68,10 +68,10 @@ app.use('/manager', managerRouter);
 app.use('/share', shareRouter);
 app.use('/suggest', suggestRouter);
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res) =>
-    res.render('index', {
+    res.render('main', {
         title: require('./package.json').name,
         port: app.get('port'),
         user: req.user
