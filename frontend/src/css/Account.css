@@ -1,0 +1,46 @@
+.signAndRegister {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 620px;
+}
+
+.signAndRegister_outLineBox {
+    display: block;
+    position: relative;
+}
+
+.signAndRegister_contentBox {
+    background-origin: padding-box;
+    background-repeat: repeat;
+    background-size: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.contentBox {
+    display: flex;
+    height: 510px;
+}
+
+.login_register_topTitle {
+    display: block;
+    font-size: 20px;
+    width: 376px;
+    height: 26px;
+    text-align: center;
+}
+
+
+.input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}

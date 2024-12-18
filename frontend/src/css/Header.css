@@ -1,0 +1,71 @@
+  .mainHeader {
+    line-height: 18px;
+    background-color: #BB86FC;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .hd_Inner{
+    width: auto;
+    height: 100px;
+  }
+  
+  .hd_Top {
+    width: auto;
+    height: 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  
+  .hd_LogoLayout {
+    display: inline-block;
+    height: 66px;
+    width: 156px;
+    padding-right: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .hd_LogoLayout a {
+    display: inline-block;
+    height: 30px;
+    width: 124px;
+    padding-top: 16px;
+    background-image: url('../images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  #hd_SearchLayout {
+    display: flex;
+  }
+  
+  #hd_sc_box input {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  #hd_sc_button button {
+    padding: 0.5rem 1rem;
+    background-color: #BB86FC;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .headerNavBarInner {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    margin: 0;
+  }
+  
+  .nav_bar_item a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
