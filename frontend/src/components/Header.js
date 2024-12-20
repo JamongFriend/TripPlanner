@@ -17,23 +17,28 @@ function Header() {
       <div className="mainHeader">
         <div className='hd_Inner'>
           <div className='hd_Top'>
-            {/* 로고 */}
-            <div className='hd_LogoLayout'>
-              <a className="logo" href='/Main'></a>
-            </div>
-
-            {/* 검색창 */}
-            <div id='hd_SearchLayout'>
-              <div id='hd_searchBoxMain'>
+            <div className='hd_top_left_wrap'>
+              {/* 로고 */}
+              <div className='hd_LogoLayout'>
+              <Link to={"/Main"}></Link>
+              </div>
+              {/* 검색창 */}
+              <div id='hd_searchLayout'>
+                <div className='title'>ddd</div>
                 <div id='hd_sc_box'>
-                  <input type="text" placeholder="여행지, 항공권 검색..." />
+                  <input 
+                    className='input'
+                    type="text"
+                    placeholder="여행지, 항공권 검색..."
+                  />
                 </div>
-                <div id='hd_sc_button'>
-                  <button>검색</button>
+                <div id='hd_sc_button_wrap'>
+                  <button className='sc_button'>
+                    검색
+                  </button>
                 </div>
               </div>
             </div>
-
             {/* 상단 기능 */}
             <div className='hd_func'>
               <div className='hd_f_option'>
