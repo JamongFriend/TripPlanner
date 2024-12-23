@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/Create.css';
 
@@ -34,27 +34,6 @@ function Create() {
     }
     };
 
-    // 카카오 맵 인스턴스를 위한 상태 변수
-    const [map, setMap] = useState(null); 
-
-    // 카카오 맵 로드 및 초기화
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=98eada7fcc4a2dd9b37cdcf9e6cf49ad`;
-        script.async = true;
-        script.onload = () => {
-            const mapContainer = document.getElementById('map');
-            const mapOption = {
-                center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-                level: 3,
-            };
-            const mapInstance = new window.kakao.maps.Map(mapContainer, mapOption);
-            setMap(mapInstance);  // 지도 상태 업데이트
-        };
-
-        document.body.appendChild(script); // 스크립트 추가
-    }, []);
-
   return (
     <div className='createPlan'>
         <div className='create_plan_outLineBox' onSubmit={handleSubmit}>
@@ -64,7 +43,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_name_title'>플래너 이름</div>
                         </div>
-                        <div className='plan_name_box'>
+                        <div className='input_box'>
                             <input
                                 type="text"
                                 name="planName"
@@ -78,7 +57,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_personnel_title'>여행 인원 수</div>
                         </div>
-                        <div className='plan_personnel_box'>
+                        <div className='input_box'>
                             <input
                                 type="number"
                                 name="personnel"
@@ -92,7 +71,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_purpose_title'>여행 목적</div>
                         </div>
-                        <div className='plan_purpose_box'>
+                        <div className='input_box'>
                             <input
                                 type="text"
                                 name="purpose"
@@ -109,7 +88,7 @@ function Create() {
                         <div className='kakaoMap_wrap'>
                             <div id='map'></div>
                         </div>
-                        <div className='plan_place_box'>
+                        <div className='input_box'>
                             <input
                                 type="text"
                                 name="place"
@@ -123,7 +102,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_date_title'>여행 기간</div>
                         </div>
-                        <div className='plan_date_box'>
+                        <div className='input_box'>
                             <input
                                 type="date"
                                 name="startDate"
@@ -142,7 +121,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_hotel_title'>숙박 시설</div>
                         </div>
-                        <div className='plan_hotel_box'>
+                        <div className='input_box'>
                             <input
                                 type="text"
                                 name="hotel"
@@ -156,7 +135,7 @@ function Create() {
                         <div className='content_title'>
                             <div className='plan_description_title'>플래너 설명</div>
                         </div>
-                        <div className='plan_description_box'>
+                        <div className='input_description_box'>
                             <textarea
                                 name="description"
                                 value={formData.description}
@@ -169,7 +148,7 @@ function Create() {
                         <button
                             type="submit"
                             className='create_plan_button'>
-
+                                생성
                             </button>
                     </div>
                 </div>
