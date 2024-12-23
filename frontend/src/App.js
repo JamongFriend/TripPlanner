@@ -5,6 +5,7 @@ import Main from './components/Main';
 import Account from './components/Account';
 import Register from './components/Register';
 import Create from './components/Create';
+import MyPlanner from './components/MyPlanner';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/Account" element={<Account />} />
       <Route path='/Register' element={<Register />}/>
       <Route path='/Create' element={<Create />}/>
+      <Route path='/MyPlanner' element={<MyPlanner />}/>
       </Routes>
     </Router>
   );

@@ -25,7 +25,7 @@ function Create() {
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('/api/plans/create', formData); // 백엔드 API 호출
+        const response = await axios.post('/creater/create', formData); // 백엔드 API 호출
         alert('플래너가 성공적으로 생성되었습니다!');
         console.log('Response:', response.data);
     } catch (error) {

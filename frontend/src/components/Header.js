@@ -6,12 +6,12 @@ import {FaSearch} from "react-icons/fa";
 
 function Header() {
   const navItems = [
-    { title: '플래너 생성', path: '/create' },
-    { title: '내 플래너', path: '/plans' },
-    { title: '플래너 공유', path: '/share' },
-    { title: '북마크', path: '/bookmarks' },
-    { title: '여행지 추천', path: '/recommend' },
-    { title: '지도', path: '/map' },
+    { title: '플래너 생성', path: '/Create' },
+    { title: '내 플래너', path: '/MyPlanner' },
+    { title: '플래너 공유', path: '/Share' },
+    { title: '북마크', path: '/Bookmarks' },
+    { title: '여행지 추천', path: '/Recommend' },
+    { title: '지도', path: '/Map' },
   ];
 
   return (
