@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Account from './components/Account';
 import Register from './components/Register';
+import Create from './components/Create';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/Account" element={<Account />} />
       <Route path='/Register' element={<Register />}/>
+      <Route path='/Create' element={<Create />}/>
       </Routes>
     </Router>
   );
