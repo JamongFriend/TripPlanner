@@ -6,7 +6,7 @@ const router = express.Router();
 
 //생성
 router.post('/create', async (req, res, next) => {
-    const {num, name, date, peoples, perpose} = req.body;
+    const {num, name, date, peoples, purpose, description} = req.body;
     const number = await Plan.findOne({ where: { num } });
     if (number) {
         next('이용 불가능한 번호입니다.');
@@ -18,9 +18,10 @@ router.post('/create', async (req, res, next) => {
             name,
             date,
             peoples,
-            perpose,
+            purpose,
             place,
-            hotel
+            hotel,
+            description
         });
 
         res.redirect('/');

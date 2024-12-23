@@ -20,7 +20,7 @@ module.exports = class Plan extends Sequelize.Model {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            perpose: {
+            purpose: {
                 type: Sequelize.TEXT,
                 allowNull: true
             },
@@ -33,6 +33,10 @@ module.exports = class Plan extends Sequelize.Model {
                 allowNull: true
             },
             restaurant: {
+                type: Sequelize.TEXT,
+                allowNull: true
+            },
+            description: {
                 type: Sequelize.TEXT,
                 allowNull: true
             }

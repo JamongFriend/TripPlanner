@@ -6,6 +6,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const cors = require('cors');
 
 const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
@@ -71,7 +72,7 @@ app.use('/suggest', suggestRouter);
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.use((req, res) =>
-    res.render('main', {
+    res.render('index', {
         title: require('./package.json').name,
         port: app.get('port'),
         user: req.user
@@ -81,6 +82,13 @@ app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).send(err);
 });
+
+// CORS 설정
+app.use(cors({
+    origin: 'http://localhost:3000', // React 개발 서버의 주소
+    methods: 'GET,POST,PUT,DELETE',  // 사용할 HTTP 메소드 설정
+    credentials: true, // 필요시 쿠키도 공유할 수 있도록 설정
+}));
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
