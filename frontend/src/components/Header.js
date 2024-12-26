@@ -10,7 +10,7 @@ function Header() {
     { title: '내 플래너', path: '/MyPlanner' },
     { title: '플래너 공유', path: '/Share' },
     { title: '북마크', path: '/Bookmarks' },
-    { title: '여행지 추천', path: '/Recommend' },
+    { title: '여행지 추천', path: '/Suggest' },
     { title: '지도', path: '/Map' },
   ];
 

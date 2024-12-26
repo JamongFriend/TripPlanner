@@ -39,10 +39,10 @@ function Account() {
         <div>
             <div className='signAndRegister'>
                 <div className='signAndRegister_outLineBox'>
+                    <div className='login_register_topTitle'>로그인 / 회원가입</div>
                     <div className='signAndRegister_content'>
                         <div className='contentBox'>
                             <form onSubmit={handleSubmit}>
-                                <div className='login_register_topTitle'>로그인 / 회원가입</div>
                                 <div className='local_login_wrap'>
                                     <div className='input_warp'>
                                         <div className='input_title'>아이디</div>
@@ -90,7 +90,7 @@ function Account() {
                                 </div>
                                 <hr nonshade/>
                                 <div className='register_box'>
-                                    <div className='register_title'>
+                                    <div className='goto_register_title'>
                                         계정이 없으신가요?
                                         <div className='goto_register'>
                                             <Link to={"/Register"}>가입하기</Link>
