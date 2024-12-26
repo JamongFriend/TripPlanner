@@ -16,15 +16,63 @@ function Register() {
     const [error, setError] = useState('');
     const [notAllow, setNotAllow] = useState(true);
     const history = useNavigate();
+    const [idError, setIdError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    // 아이디 형식 유효성 검사 (프론트엔드)
+    const validateId = (id) => {
+        if (id.length < 3) return '아이디는 3자 이상이어야 합니다.';
+        const regex = /^[a-zA-Z0-9]+$/;
+        if (!regex.test(id)) return '아이디는 영문과 숫자만 포함할 수 있습니다.';
+        return '';  // 유효하면 빈 문자열
+    };
+
+    // 아이디 변경 시 처리
+    const handleIdChange = (event) => {
+        const newId = event.target.value;
+        setFormData((prevState) => ({
+            ...prevState,
+            id: newId,
+        }));
+
+        // 형식 검사
+        const errorMessage = validateId(newId);
+        setIdError(errorMessage);
+    };
+
+    // 아이디 중복 확인 함수
+    const checkIdAvailability = async (id) => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`/manager/check-id/${id}`);
+            if (response.status === 200) {
+                setIdError('사용 가능한 아이디입니다.');
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setIdError('이미 등록된 사용자 아이디입니다.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
+        setFormData((prevState) => ({
             ...prevState,
-            [name]: value
+            [name]: value,
         }));
-        
-        if (formData.id.trim() && formData.password.trim() && formData.checkPassword.trim() && formData.name.trim()) {
+
+        // 입력값이 모두 채워졌는지 확인
+        if (
+            formData.id.trim() &&
+            formData.password.trim() &&
+            formData.checkPassword.trim() &&
+            formData.name.trim() &&
+            formData.checkPhone.trim() &&
+            !idError
+        ) {
             setNotAllow(false);
         } else {
             setNotAllow(true);
@@ -70,11 +118,17 @@ function Register() {
                                             type="text"
                                             name="id"
                                             value={formData.id}
-                                            onChange={handleChange}
+                                            onChange={handleIdChange}
                                             placeholder="아이디를 입력하세요"
                                         />
+                                        {loading && <p>로딩 중...</p>}
+                                        {idError && <p className="error">{idError}</p>}
                                     </div>
-                                    <button className='check_id_button'>
+                                    <button
+                                        type="button"
+                                        className='check_id_button'
+                                        onClick={checkIdAvailability}
+                                    >
                                         아이디 확인
                                     </button>
                                 </div>

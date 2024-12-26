@@ -20,6 +20,10 @@ module.exports = class User extends Sequelize.Model {
                 type: Sequelize.STRING(20),
                 allowNull: false
             },
+            phoneNum: {
+                type: Sequelize.STRING(20),
+                allowNull: false
+            },
             description: {
                 type: Sequelize.TEXT,
                 allowNull: true
