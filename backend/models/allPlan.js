@@ -8,15 +8,19 @@ module.exports = class AllPlan extends Sequelize.Model {
                 allowNull: false,
                 primaryKey: true
             },
-            name: {
+            planName: {
                 type: Sequelize.STRING(100),
                 allowNull: false
             },
-            date: {
+            startDate: {
                 type: Sequelize.STRING(100),
                 allowNull: true
             },
-            peoples: {
+            endDate: {
+                type: Sequelize.STRING(100),
+                allowNull: true
+            },
+            personnel: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
