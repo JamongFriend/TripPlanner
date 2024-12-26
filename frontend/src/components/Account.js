@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../css/Account.css';
 
 function Account() {
-    const [email, setEmail] = useState('');
+    const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const history = useNavigate();
@@ -15,7 +15,7 @@ function Account() {
       
       try {
         // 로그인 요청 보내기
-        const response = await axios.post('/login', { email, password });
+        const response = await axios.post('/login', { id, password });
         
         if (response.data.success) {
           // 로그인 성공 시 리다이렉트
@@ -27,7 +27,7 @@ function Account() {
     };
 
     const handleInputChange = () => {
-        if(email.trim() && password.trim()) {
+        if(id.trim() && password.trim()) {
             setNotAllow(false);
         }
         else {
@@ -45,18 +45,18 @@ function Account() {
                                 <div className='login_register_topTitle'>로그인 / 회원가입</div>
                                 <div className='local_login_wrap'>
                                     <div className='input_warp'>
-                                        <div className='input_title'>이메일</div>
+                                        <div className='input_title'>아이디</div>
                                         <div className='input_box'>
                                             <input
                                                 className='input'
-                                                type="email"
-                                                value={email}
+                                                type="id"
+                                                value={id}
                                                 onChange={(e) => {
-                                                    setEmail(e.target.value);
+                                                    setId(e.target.value);
                                                     handleInputChange();
                                                 }}
                                                 required
-                                                placeholder="이메일을 입력하세요"
+                                                placeholder="아이디를 입력하세요"
                                             />
                                         </div>
                                         <div className='input_title'>비밀번호</div>

@@ -1,15 +1,15 @@
-.createPlan {
+.register_wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     margin-top: 20px;
 }
-.create_plan_outLineBox {
+.register_outLineBox {
     display: block;
     position: relative;
 }
-.create_plan_content{
+.register_content{
     background-origin: padding-box;
     background-repeat: repeat;
     background-size: auto;
@@ -26,6 +26,11 @@
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
+}
+.register_title {
+    font-size: 30px;
+    color: #BB86FC;
+    margin-bottom: 10px;
 }
 
 .content_title {
@@ -79,6 +84,45 @@ textarea {
     color: rgba(0, 0, 0, 0.5);
 }
 
+.content_wrap {
+    display: flex;
+    align-items: center;
+}
+
+/* 버튼들 */
+.check_id_button{
+    margin-left: 15px;
+    height: 40px;
+    background-color: #BB86FC;
+    border: none;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 64px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.check_phone_button:hover {
+    background-color: #9C66D5;
+}
+
+.check_phone_button {
+    margin-left: 15px;
+    height: 40px;
+    background-color: #BB86FC;
+    border: none;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 64px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.check_phone_button:hover {
+    background-color: #9C66D5;
+}
+
+
+/*회원가입 버튼*/
 .register_button_wrap {
     display: flex;
     justify-content: center;
