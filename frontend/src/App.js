@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Create from './components/Create';
 import MyPlanner from './components/MyPlanner';
 import Suggest from './components/Suggest';
+import Map from './components/Map';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path='/Create' element={<Create />}/>
       <Route path='/MyPlanner' element={<MyPlanner />}/>
       <Route path='/Suggest' element={<Suggest />}/>
+      <Route path='/Map' element={<Map />}/>
       </Routes>
     </Router>
   );
