@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Account.css';
+import '../css/Login.css';
 
-function Account() {
+function Login() {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -34,6 +34,7 @@ function Account() {
             setNotAllow(true);
         }
     }
+    
 
     return (
         <div>
@@ -97,6 +98,10 @@ function Account() {
                                         </div>
                                     </div>
                                 </div>
+                                <hr nonshade/>
+                                <div className='kakao_login_wrap'>
+                                    <Link to={"/Kakao"}>카카오 로그인</Link>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -106,4 +111,4 @@ function Account() {
     );
 }
 
-export default Account;
+export default Login;
